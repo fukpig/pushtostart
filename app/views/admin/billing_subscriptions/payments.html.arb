@@ -1,0 +1,23 @@
+table_for invoices do 
+    column "Тип оплаты" do |invoice|
+		if (invoice.type_of == 'create_email')
+			"Создание ящика"
+		elsif (invoice.type_of == 'create_domain')
+			"Регистрация домена"
+		elsif (invoice.type_of == 'email')
+			"Оплата ящиков"
+		elsif (invoice.type_of == 'domain')
+			"Оплата домена"
+		end
+		
+	end
+    column "Цена" do |invoice|
+		invoice.full_amount
+	end
+	column "Домен" do |invoice|
+		invoice.title
+	end
+	column "Дата оплаты" do |invoice|
+		invoice.paid_at
+	end
+end

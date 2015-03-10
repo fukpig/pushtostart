@@ -1,0 +1,25 @@
+<%= form_tag(save_zones_admin_ps_config_zones_path) do %>
+	<%= csrf_meta_tags %>
+	<table>
+   <% @zones.prices.keys.each do |zone| %>
+		<tr>
+			<td>
+				<%= zone %>
+			</td>
+			<td>
+				<%= hidden_field_tag "zones['" + zone + "'][regru_price]", @zones.prices[zone].reg_price %>
+				<%= @zones.prices[zone].reg_price %>
+			</td>
+			<td>
+				<%= text_field_tag "zones['" + zone + "'][ps_price]", @zones.prices[zone].reg_price %>
+			</td>
+			<td>
+				<%= hidden_field_tag "zones['" + zone + "'][year]", @zones.prices[zone].reg_min_period %>
+				<%= @zones.prices[zone].reg_min_period %>
+			</td>
+		</tr>
+	<% end %>   
+	</table>
+  <%= submit_tag %>
+
+<% end %>

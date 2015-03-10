@@ -1,0 +1,11 @@
+table_for groups do 
+    column "Name" do |group|
+		group.email
+    end
+    column "Description" do |group|
+                group.description
+    end
+    column "Emails" do |group|
+       group.email_accounts.map(&:email).join("<br />").html_safe
+    end
+end
