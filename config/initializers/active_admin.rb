@@ -230,4 +230,10 @@ ActiveAdmin.setup do |config|
   # You can enable or disable them for all resources here.
   #
   # config.filters = true
+  config.register_javascript 'zones.js'
+  config.show_comments_in_menu = false
+end
+
+module ActiveAdmin::ViewHelpers
+  include AdminHelper
 end

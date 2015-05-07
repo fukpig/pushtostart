@@ -1,4 +1,5 @@
 ActiveAdmin.register Domain do
+     filter :domain
 	menu :label => "Домены"
 	
 	index :title => "Домены" do
@@ -7,7 +8,6 @@ ActiveAdmin.register Domain do
 	  column "Домен", :domain
 	  column "Дата окончания", :expiry_date
 	  column "Статус", :status
-	  column "Резервный телефон", :recovery_cellphone
 	 end
 	
 

@@ -1,0 +1,17 @@
+table_for emails do 
+    column "Email" do |email|
+		email.email
+	end
+    column "Админ" do |email|
+		email.is_admin
+	end
+    column "ФИО" do |email|
+		email.name
+	end
+	column "Дата создания" do |email|
+		email.created_at
+	end
+    column "Дата изменения" do |email|
+		email.updated_at
+	end
+end

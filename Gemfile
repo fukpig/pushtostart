@@ -62,8 +62,6 @@ gem 'cancancan'
 
 gem 'google-api-client'
 
-gem 'paper_trail'
-
 gem 'russian'
 
 gem 'daemons'
@@ -90,6 +88,17 @@ gem 'global_phone_dbgen'
 
 gem 'simpleidn'
 
-gem 'mail'
-
 gem 'cancan'
+
+gem 'paperclip'
+
+gem 'activesupport-json_encoder'
+gem 'aasm'
+
+gem "audited-activerecord", "~> 4.0"
+
+gem 'mechanize'
+
+gem 'deathbycaptcha'
+gem 'chartkick'
+gem 'groupdate'

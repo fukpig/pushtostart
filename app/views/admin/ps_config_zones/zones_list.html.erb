@@ -11,7 +11,7 @@
 				<%= @zones.prices[zone].reg_price %>
 			</td>
 			<td>
-				<%= text_field_tag "zones['" + zone + "'][ps_price]", @zones.prices[zone].reg_price %>
+				<%= text_field_tag "zones['" + zone + "'][ps_price]", get_ps_price(@zones.prices[zone].reg_price.to_f) %>
 			</td>
 			<td>
 				<%= hidden_field_tag "zones['" + zone + "'][year]", @zones.prices[zone].reg_min_period %>

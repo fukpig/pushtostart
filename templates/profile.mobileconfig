@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple/DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>PayloadContent</key>
+    <array>
+	<dict>
+	    <key>PayloadDisplayName</key>
+	    <string>Email Settings</string>
+	    <key>PayloadType</key>
+	    <string>com.apple.mail.managed</string>
+	    <key>PayloadVersion</key>
+	    <integer>1</integer>
+	    <key>PayloadUUID</key>
+	    <string>362e5c11-a332-4dfb-b18b-f6f0aac032fd</string>
+	    <key>PayloadIdentifier</key>
+	    <string>com.example.iPhone.settings.email</string>
+	    <key>EmailAccountDescription</key>
+	    <string>Company E-mail</string>
+	    <key>EmailAccountName</key>
+	    <string>Full Name</string>
+	    <key>EmailAccountType</key>
+	    <string>EmailTypeIMAP</string>
+	    <key>EmailAddress</key>
+	    <string>admin@belkamail.com</string>
+	    <key>IncomingMailServerAuthentication</key>
+	    <string>EmailAuthPassword</string>
+	    <key>IncomingMailServerHostName</key>
+	    <string>imap.yandex.ru</string>
+	    <key>IncomingMailServerUseSSL</key>
+	    <true />
+	    <key>IncomingMailServerUsername</key>
+	    <string>[email]</string>
+	    <key>OutgoingPasswordSameAsIncomingPassword</key>
+	    <true />
+	    <key>IncomingPassword</key>
+	    <string>[password]</string>
+	    <key>OutgoingMailServerAuthentication</key>
+	    <string>EmailAuthPassword</string>
+	    <key>OutgoingMailServerHostName</key>
+	    <string>smtp.yandex.ru</string>
+	    <key>OutgoingMailServerUseSSL</key>
+	    <true />
+	    <key>OutgoingMailServerUsername</key>
+	    <string>[email]</string>
+	</dict>
+    </array>
+    <key>PayloadOrganization</key>
+    <string>Your Organization's Name</string>
+    <key>PayloadDisplayName</key>
+    <string>Organization iPhone Settings</string>
+    <key>PayloadVersion</key>
+    <integer>1</integer>
+    <key>PayloadUUID</key>
+    <string>954e6e8b-5489-484c-9b1d-0c9b7bf18e32</string>
+    <key>PayloadIdentifier</key>
+    <string>com.example.iPhone.settings</string>
+    <key>PayloadDescription</key>
+    <string>Sets up Organization's LDAP directories and email on the iPhone</string>
+    <key>PayloadType</key>
+    <string>Configuration</string>
+</dict>
+</plist>

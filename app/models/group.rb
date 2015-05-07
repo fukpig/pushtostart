@@ -7,16 +7,27 @@ class Group < ActiveRecord::Base
 		if info = self.check_email_exist(email, domain['id'])
 			return info
 		end
-      if !email.groups.where("email_account_id = ?", email["id"]).first
+      if !email.groups.where("email_account_id = ? and id = ?", email["id"], group.id).first
         group.email_accounts << email
         group.save!
-        info = { email => {"status"=>"ok", "message"=>"email added to group"}}
+        info = { email.email => {"status"=>"ok", "message"=>"email added to group"}}
       else
-        info = { email => {"status"=>"errors", "message"=>"email already added to group"}}
+        info = { email.email => {"status"=>"errors", "message"=>"email already added to group"}}
       end
 	  return info
 	end
 	
+	def self.get_info(groups)
+	  info = Array.new()
+      groups.each do |group|
+        domain = Domain.where('id = ?', group["domain_id"]).first
+        if domain 
+          info << { "id" => group['id'], 'email' => group['email'], "description" => group['description']}
+        end
+      end
+      return info
+	end
+
 	def self.get_group(domain, email)
 	   Domain.check_domain(domain)
 	   group = Group.where(["email = ? AND domain_id = ?", email , domain.id]).first
@@ -28,12 +39,12 @@ class Group < ActiveRecord::Base
 	  if info = self.check_email_exist(email, domain['id'])
 			return info
 		end
-      in_group_email = group.email_accounts.find(email)
-      if in_group_email
+      if email.groups.where("email_account_id = ? and id = ?", email["id"], group.id).first
+      	in_group_email = group.email_accounts.find(email)
         group.email_accounts.delete(in_group_email)
-        info = { email  => {"status"=>"ok", "message"=>"email removed from group"}}
+        info = { email.email  => {"status"=>"ok", "message"=>"email removed from group"}}
       else
-        info = { email => {"status"=>"errors", "message"=>"no such email in group"}}
+        info = { email.email => {"status"=>"errors", "message"=>"no such email in group"}}
       end
 	  return info
 	end

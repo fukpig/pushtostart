@@ -1,13 +1,11 @@
 class DelegatedDomain < ActiveRecord::Base
 
-    validates :from, presence: true
-    validates :to, presence: true
+    validates :cellphone, presence: true
+    validates :inviter_id, presence: true
 
 	def self.delegate(data)
-	  check_existed_delegate(data['domain_id'], data['from'], data['to'])
-  	  check_invite_himself(data['domain_id'], data['from'])
-  	  #CHECK_EMAIL
-  	  delegate = DelegatedDomain.create(domain_id:  data['domain_id'], from: data['from'], to: data['to'])
+	  #check_invite_himself(data['domain_id'], data['cellphone'])
+  	  delegate = DelegatedDomain.create(domain_id:  data['domain_id'], inviter_id: data['user_id'], cellphone: data['cellphone'])
 	  return {"message"=>"delegated domain has been added"}
 	end
 
@@ -15,8 +13,8 @@ class DelegatedDomain < ActiveRecord::Base
   	raise ApiError.new("Send invite failed", "SEND_INVITE_FAILED", "invalid cellphone") unless cellphone != user_cellphone
   end
 
-  def self.get_delegate_invite(user_id, invite_id)
-	invite = DelegatedDomain.where(["to = ? and id=?",current_user.id, @params["delegate_id"]]).first
+  def self.get_delegate_invite(cellphone, invite_id)
+	invite = DelegatedDomain.where("cellphone = ? and id = ?",cellphone, invite_id).first
 	if !invite.nil?
 	  return invite
 	else
@@ -24,7 +22,7 @@ class DelegatedDomain < ActiveRecord::Base
 	end
   end
 	
-	def self.accept
+	def accept
 	 self.update_attribute( :accepted, true ) 
 	end
 end

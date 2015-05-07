@@ -1,0 +1,28 @@
+table_for invoices do 
+    column "Номер телефона" do |invoice|
+		invoice.user.cellphone
+	end
+	column "Имя" do |invoice|
+		invoice.user.name
+	end
+	column "Дата оплаты" do |invoice|
+		invoice.created_at
+	end
+	column "Кол-во доменов" do |invoice|
+		invoice.user.domains.count
+	end
+	column "Домен" do |invoice|
+		invoice.params
+	end
+	column "Действие" do |invoice|
+		invoice.type_of
+	end
+	column "Кол-во ящиков" do |invoice|
+		count = 0
+        invoice.user.domains.map {|domain| count = count + domain.email_accounts.count}
+        count
+	end
+	column "Сумма оказанных услуг" do |invoice|
+		invoice.full_amount
+	end
+end

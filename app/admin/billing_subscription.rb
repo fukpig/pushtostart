@@ -1,4 +1,5 @@
 ActiveAdmin.register Billing::Subscription do
+  menu false
   menu :label => "Подписки"
   
   index  :title => "Подписки" do

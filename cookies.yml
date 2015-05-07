@@ -1,0 +1,15 @@
+---
+yandex.ru:
+  "/":
+    yandexuid: !ruby/object:Mechanize::Cookie
+      name: yandexuid
+      value: '433308991428596425'
+      domain: yandex.ru
+      for_domain: true
+      path: "/"
+      secure: false
+      httponly: false
+      expires: Sun, 06 Apr 2025 16:20:25 GMT
+      max_age: 
+      created_at: &1 2015-04-09 12:20:25.160320009 -04:00
+      accessed_at: *1

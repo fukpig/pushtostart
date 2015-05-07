@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   get '/docs', to: 'application#docs'
+  get 'download_mobileconfig', to: 'file#ios_file'
   #API
   mount API => '/'
   # The priority is based upon order of creation: first created -> highest priority.

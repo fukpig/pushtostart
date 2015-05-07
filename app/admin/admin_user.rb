@@ -1,4 +1,5 @@
 ActiveAdmin.register AdminUser do
+  menu false
   menu :label => "Администраторы"
 
   permit_params :email, :password, :password_confirmation

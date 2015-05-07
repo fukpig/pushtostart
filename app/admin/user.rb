@@ -1,20 +1,58 @@
 ActiveAdmin.register User do
  menu :label => "Пользователи"
+ 
+ filter :cellphone
+ 
  index :title => "Пользователи" do  
-    column "Id", :id
-    column "Телефон", :cellphone
-    column "Активирован", :activated
-    column "Заблокирован", :locked
-    column "Баланс", :internal_credit
-	column "Дата регистрации", :created_at
-    column "" do |resource|
-       links = ''.html_safe
-       links += link_to I18n.t('active_admin.view'), resource_path(resource), :class => "member_link view_link"
-       links += link_to I18n.t('active_admin.edit'), edit_resource_path(resource), :class => "member_link edit_link"
-       links
+    column "Телефон", :cellphone,  sortable: :cellphone
+    column "Имя", :name
+    column "Дата регистрации", :created_at, sortable: :created_at
+    column "Кол-во доменов" do |user|
+      user.domains.count
+    end
+    column "Кол-во ящиков купленных" do |user|
+      count = 0
+      user.domains.map {|domain| count = count + domain.email_accounts.count}
+      link_to(count,emails_admin_user_path(user))
+    end
+    column "Кол-во ящиков делегированых" do |user|
+      count = 0
+      user.domains.each do  |domain| 
+        domain.email_accounts.each do |email|
+          count = count + 1 if email.user != user
+        end
+      end
+      link_to(count,emails_delegated_admin_user_path(user))
+    end
+    column "Оплаты" do |user|
+      link_to("Оплаты",billing_admin_user_path(user))
     end
   end
   
+
+  member_action :billing do
+    @invoices = resource.billing_invoices
+  end
+
+  member_action :emails do
+    info = Array.new
+    resource.domains.each do  |domain| 
+        domain.email_accounts.each do |email|
+          info << email
+        end
+    end
+    @emails = info
+  end
+
+  member_action :emails_delegated do
+    info = Array.new
+    resource.domains.each do  |domain| 
+        domain.email_accounts.each do |email|
+          info << email if email.user != resource
+        end
+    end
+    @emails = info
+  end
 
   show do |user|
       attributes_table do
@@ -23,9 +61,6 @@ ActiveAdmin.register User do
         end
         row "Фио" do
             user.name
-        end
-		row "Дата регистрации" do
-            user.created_at
         end
         row "Количество доменов" do
             user.domains.count

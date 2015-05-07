@@ -1,4 +1,5 @@
 ActiveAdmin.register PsConfigZones do
+  require 'regru'
   menu :parent => "Настройки", :label => "Настройки доменных зон"
   
   config.filters = false
@@ -22,13 +23,13 @@ ActiveAdmin.register PsConfigZones do
   end
   
   collection_action :reg_ru, :method => :get do
-	  @zones = get_domain_prices
-      render "zones_list", :layout => false
+    @zones = Regru.get_domain_prices
+    render "zones_list", :layout => false
   end
   
   collection_action :save_zones, :method => :post do
 	if !params["zones"].nil?
-		PsConfigZones.delete_all
+		PsConfigZones.where.not(name: 'pushtostart.ru').delete_all
 		params["zones"].each do |zone|
 			zone = PsConfigZones.new(name: zone[0].tr("'", ""), orig_price: zone[1]["regru_price"], ps_price: zone[1]["ps_price"], years: zone[1]["year"].to_i)
 			zone.save

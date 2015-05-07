@@ -13,7 +13,7 @@ class Invite < ActiveRecord::Base
   	  check_invite_himself(user['cellphone'], data['cellphone'])
   	  #CHECK_EMAIL
   	  domain_owner?(user.domains, data['domain_id'])
-	  invite = Invite.create(cellphone:  data['cellphone'], inviter_id: user['id'], domain_id: data['domain_id'], name: data['name'], email_id: data['email_id'])
+	  invite = Invite.create(cellphone:  data['cellphone'],accepted:false, inviter_id: user['id'], domain_id: data['domain_id'], name: data['name'], email_id: data['email_id'])
 	  if (!User.where(["cellphone = ?", data['cellphone']]).present?)
 	    return save_invite(invite)
 	  else 
@@ -27,7 +27,7 @@ class Invite < ActiveRecord::Base
     end
 
     def self.check_invite_himself(user_cellphone, cellphone)
-  	  raise ApiError.new("Send invite failed", "SEND_INVITE_FAILED", "invalid cellphone") unless cellphone != user_cellphone
+  	  raise ApiError.new("Send invite failed", "SEND_INVITE_FAILED", "Cellphone similar your cellphone") unless cellphone != user_cellphone
     end
 
     def self.save_invite(invite)

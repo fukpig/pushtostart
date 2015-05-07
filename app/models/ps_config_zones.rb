@@ -4,7 +4,7 @@ class PsConfigZones < ActiveRecord::Base
 	  zone = PsConfigZones.where("name = ?", name).first
 			
 	  if zone.nil?
-		raise ApiError.new("Find zone failed", "FIND_ZONE_FAILED", 'Not such zone')
+		raise ApiError.new("Find zone failed", "FIND_ZONE_FAILED", 'No such zone')
 	  end
 	  return zone
 	end

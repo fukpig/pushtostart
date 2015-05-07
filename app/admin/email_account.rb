@@ -1,4 +1,6 @@
 ActiveAdmin.register EmailAccount do
+  filter :email
+  filter :is_enabled
   menu :label => "Почтовые ящики"
 
   index :title => "Почтовые ящики" do
